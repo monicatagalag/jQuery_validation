@@ -80,9 +80,9 @@
           confirm_password:{required:true,equalTo:"#reg_password"}
         },
         messages:{
-          reg_username:{required:"Username required",minlength:"Atleast 3 characters, only letters, numbers, underscores."},
+          reg_username:{required:"Username required",minlength:"Atleast 3 characters"},
           reg_email:{required:"Email required",email:"Enter a valid email"},
-          reg_password:{required:"Password required",minlength:"Atleast 5 chars, can be uppercase, lowercase, number, or special character."},
+          reg_password:{required:"Password required",minlength:"Atleast 5 characters, can be uppercase, lowercase, number, or special character."},
           confirm_password:{required:"Please confirm password",equalTo:"Passwords do not match"}
         },
         submitHandler:function(form,e){
