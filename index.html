@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login | jQuery Activity</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;font-family:Inter,system-ui;
+      background:url('images/black-bg.jpg') no-repeat center center/cover;
+      min-height:100vh;display:flex;justify-content:center;align-items:center;
+      color:#fff;
+    }
+    .overlay{position:absolute;inset:0;background:rgba(0,0,0,0.55)}
+    .card{
+      position:relative;z-index:1;
+      background:rgba(255,255,255,0.08);backdrop-filter:blur(6px);
+      padding:2rem;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.5);
+      width:100%;max-width:380px;text-align:center;
+    }
+    h1{margin:0 0 8px;font-size:28px}
+    p.lead{margin:0 0 20px;color:#ddd;font-size:15px}
+    form{display:flex;flex-direction:column;gap:14px}
+    label{font-size:13px;color:#ccc;display:block;text-align:left;margin-bottom:4px}
+    input{
+      width:100%;
+      padding:12px;border-radius:8px;border:none;
+      background:rgba(255,255,255,0.15);color:#fff
+    }
+    input::placeholder{color:#bbb}
+    .forgot{
+      text-align:right;
+      font-size:13px;
+      margin-top:-8px;
+    }
+    .forgot a{color:#6ee7b7;text-decoration:none}
+    .btn{
+      width:100%;
+      padding:12px;border:none;border-radius:8px;
+      background:linear-gradient(90deg,#60a5fa,#6ee7b7);
+      color:#042028;font-weight:600;cursor:pointer
+    }
+    label.error{color:#ffb4b4;font-size:13px;margin-top:4px;display:block;text-align:left}
+    .muted{font-size:13px;color:#bbb;text-align:center;margin-top:10px}
+    .muted a{color:#6ee7b7;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="card">
+    <h1>Login</h1>
+    <p class="lead">Welcome back! Please sign in below.</p>
+    <form id="loginForm" novalidate>
+      <div>
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="Enter username">
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="Enter password">
+      </div>
+      <div class="forgot">
+        <a href="#">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn">Sign In</button>
+      <div class="muted">No account? <a href="register.html">Register here</a></div>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+  <script>
+    $(function(){
+      $("#loginForm").validate({
+        rules:{username:{required:true,minlength:3},password:{required:true,minlength:3}},
+        messages:{
+          username:{required:"Username required",minlength:"At least 3 chars"},
+          password:{required:"Password required",minlength:"At least 3 chars"}
+        },
+        submitHandler:function(form,e){
+          e.preventDefault();
+          const u=$("#username").val(), p=$("#password").val();
+          if(u==="wst" && p==="12345"){
+            localStorage.setItem("solo_logged_in","true");
+            localStorage.setItem("solo_user",u);
+            window.location.href="welcome.html";
+          } else {
+            alert("Invalid credentials (try wst / 12345)");
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
